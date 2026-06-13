@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AAC 보드 - 세상을 보는 눈</title>
+<style>
+body{font-family:'Malgun Gothic',sans-serif;background:#f4f6fa;margin:0;padding:15px}
+h1{text-align:center;margin:10px}
+.panel{max-width:1100px;margin:auto}
+.message{
+background:white;border-radius:15px;padding:15px;
+font-size:32px;min-height:70px;margin-bottom:15px;
+border:3px solid #d9e3f0;
+}
+.controls{display:flex;gap:10px;margin-bottom:15px}
+.controls button{flex:1;padding:15px;font-size:22px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:10px;
+}
+.btn{
+min-height:110px;
+font-size:28px;
+border:none;
+border-radius:16px;
+background:white;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
+cursor:pointer;
+}
+.section{
+margin-top:18px;
+background:#eaf0ff;
+padding:10px;
+border-radius:12px;
+}
+h2{margin:5px 0 10px}
+</style>
+</head>
+<body>
+<div class="panel">
+<h1>👀 세상을 보는 눈 AAC</h1>
+
+<div class="message" id="sentence">버튼을 눌러 문장을 만들어 보세요.</div>
+
+<div class="controls">
+<button onclick="speakSentence()">🔊 읽어주기</button>
+<button onclick="clearSentence()">🗑 지우기</button>
+</div>
+
+<div class="section">
+<h2>👀 눈과 보기</h2>
+<div class="grid">
+<button class="btn" onclick="addWord('눈')">👀<br>눈</button>
+<button class="btn" onclick="addWord('본다')">📷<br>본다</button>
+<button class="btn" onclick="addWord('시각')">👁️<br>시각</button>
+<button class="btn" onclick="addWord('관찰')">🔍<br>관찰</button>
+<button class="btn" onclick="addWord('안경')">🤓<br>안경</button>
+<button class="btn" onclick="addWord('눈이 아파요')">🥺<br>눈아파요</button>
+</div>
+</div>
+
+<div class="section">
+<h2>🌳 주변 사물</h2>
+<div class="grid">
+<button class="btn" onclick="addWord('친구')">🧑<br>친구</button>
+<button class="btn" onclick="addWord('책')">📚<br>책</button>
+<button class="btn" onclick="addWord('나무')">🌳<br>나무</button>
+<button class="btn" onclick="addWord('자동차')">🚗<br>자동차</button>
+<button class="btn" onclick="addWord('교실')">🏫<br>교실</button>
+<button class="btn" onclick="addWord('선생님')">👩‍🏫<br>선생님</button>
+</div>
+</div>
+
+<div class="section">
+<h2>😊 내 생각 말하기</h2>
+<div class="grid">
+<button class="btn" onclick="addWord('좋아요')">👍<br>좋아요</button>
+<button class="btn" onclick="addWord('싫어요')">👎<br>싫어요</button>
+<button class="btn" onclick="addWord('재미있어요')">😄<br>재미있어요</button>
+<button class="btn" onclick="addWord('어려워요')">😥<br>어려워요</button>
+<button class="btn" onclick="addWord('또 해요')">🙋<br>또 해요</button>
+<button class="btn" onclick="addWord('도와주세요')">🆘<br>도와주세요</button>
+</div>
+</div>
+
+<div class="section">
+<h2>💡 눈 건강</h2>
+<div class="grid">
+<button class="btn" onclick="addWord('골고루 먹기')">🥕<br>먹기</button>
+<button class="btn" onclick="addWord('충분히 자기')">😴<br>잠자기</button>
+<button class="btn" onclick="addWord('눈 스트레칭')">🤸<br>스트레칭</button>
+<button class="btn" onclick="addWord('거리 두기')">📖↔️<br>거리두기</button>
+<button class="btn" onclick="addWord('밝아요')">☀️<br>밝아요</button>
+<button class="btn" onclick="addWord('어두워요')">🌙<br>어두워요</button>
+</div>
+</div>
+</div>
+
+<script>
+let words=[];
+function addWord(word){
+ words.push(word);
+ document.getElementById('sentence').innerText=words.join(' ');
+ speak(word);
+}
+function clearSentence(){
+ words=[];
+ document.getElementById('sentence').innerText='버튼을 눌러 문장을 만들어 보세요.';
+}
+function speak(text){
+ let u=new SpeechSynthesisUtterance(text);
+ u.lang='ko-KR';
+ speechSynthesis.speak(u);
+}
+function speakSentence(){
+ if(words.length===0) return;
+ speak(words.join(' '));
+}
+</script>
+</body>
+</html>
